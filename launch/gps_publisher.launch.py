@@ -49,14 +49,14 @@ def generate_launch_description():
         shell=True
     )
 
-    sensor_combined_listener_node = Node(
+    gps_publisher_node = Node(
         package='px4_ros_com',
-        executable='sensor_combined_listener',
+        executable='gps_publisher',
         output='screen',
         shell=True,
     )
 
     return LaunchDescription([
         #micro_ros_agent,
-        sensor_combined_listener_node
+        gps_publisher_node
     ])

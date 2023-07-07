@@ -55,6 +55,14 @@ add_executable(debug_vect_advertiser src/examples/advertisers/debug_vect_adverti
 ament_target_dependencies(debug_vect_advertiser rclcpp px4_msgs)
 install(TARGETS debug_vect_advertiser DESTINATION lib/${PROJECT_NAME})
 
+add_executable(imu_publisher src/examples/advertisers/imu_publisher.cpp)
+ament_target_dependencies(imu_publisher rclcpp px4_msgs sensor_msgs)
+install(TARGETS imu_publisher DESTINATION lib/${PROJECT_NAME})
+
+add_executable(gps_publisher src/examples/advertisers/gps_publisher.cpp)
+ament_target_dependencies(gps_publisher rclcpp px4_msgs sensor_msgs)
+install(TARGETS gps_publisher DESTINATION lib/${PROJECT_NAME})
+
 # examples/offboard/offboard_control
 add_executable(offboard_control src/examples/offboard/offboard_control.cpp)
 ament_target_dependencies(offboard_control rclcpp px4_msgs)
