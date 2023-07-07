@@ -24,6 +24,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(px4_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 
 #################
 # Setup targets #
@@ -33,7 +34,7 @@ include_directories(include)
 
 # Add frame_transforms lib
 add_library(frame_transforms SHARED src/lib/frame_transforms.cpp)
-ament_target_dependencies(frame_transforms Eigen3 geometry_msgs sensor_msgs)
+ament_target_dependencies(frame_transforms Eigen3 geometry_msgs sensor_msgs nav_msgs)
 target_include_directories(frame_transforms PUBLIC
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}>
 	$<INSTALL_INTERFACE:include/${PROJECT_NAME}>
@@ -62,6 +63,10 @@ install(TARGETS imu_publisher DESTINATION lib/${PROJECT_NAME})
 add_executable(gps_publisher src/examples/advertisers/gps_publisher.cpp)
 ament_target_dependencies(gps_publisher rclcpp px4_msgs sensor_msgs)
 install(TARGETS gps_publisher DESTINATION lib/${PROJECT_NAME})
+
+add_executable(odom_publisher src/examples/advertisers/odom_publisher.cpp)
+ament_target_dependencies(odom_publisher rclcpp px4_msgs sensor_msgs nav_msgs)
+install(TARGETS odom_publisher DESTINATION lib/${PROJECT_NAME})
 
 # examples/offboard/offboard_control
 add_executable(offboard_control src/examples/offboard/offboard_control.cpp)
